@@ -1,2 +1,20 @@
-BBCBasic/.DS_Store
-ASSETS
+BBC Resources/
+docker/
+node_modules/
+public/
+src/
+tests/
+COPYING
+Dockerfile
+eslint.config.js
+index.html
+jsconfig.json
+Makefile
+OG README.md
+package-lock.json
+package.json
+run-container.sh
+style.css
+vite.config.js
+.DS_Store
+index.html

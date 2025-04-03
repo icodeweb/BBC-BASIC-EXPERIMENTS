@@ -1,14 +1,164 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I CODE BBC BASIC</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="ibrahim ismail" />
+  <title>I CODE BBC BASIC</title>
+  <meta name="description" content="my BBC Micro experiments" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="/src/main.js"></script>
 </head>
 
 <body>
+  <div class="continer">
+    <canvas id="screen" width="896" height="600"></canvas>
+    <canvas id="audio-stats" width="896" height="100"></canvas>
 
+    <nav>
+      <a href="#configuration" class="nav-link" data-bs-toggle="modal" data-bs-target="#configuration">
+        <span class="bbc-model">BBC B</span></a>
+      <a href="#" id="fs">Fullscreen</a>
+      <a href="#" id="soft-reset">Soft reset</a>
+      <a href="#" id="hard-reset">Hard reset</a>
+      <a href="#download-drive" id="download-drive-link">Download</a>
+      <br>
+      <a href="?disc1=elite.ssd&autorun&embed&autoboot=true&autotype=*CAT%0a*EXEC%20!BOOT%0a">cat</a>
+      <a href="?disc1=elite.ssd&autoboot=true">1</a>
+      <a href="?disc1=frogman.ssd&autoboot=true&embed">2</a>
+      <br>
+      <input id="paste-text" type="text" />
+      <input type="file" id="disc_load" accept=".ssd,.dsd,.adf,.adm,.adl,.hfe,application/binary" />
+    </nav>
+
+    <div class="modal fade" id="error-dialog" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div>While <span class="context"></span>: <span class="error"></span></div>
+      </div>
+    </div>
+    <div class="modal fade" id="configuration" tabindex="-1" aria-labelledby="configurationModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="configurationModalLabel">Emulation Configuration</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row align-items-center">
+              <div class="col-sm-6">
+                <label for="bbc-model-dropdown" class="col-form-label">Base model:<br />
+                  <small>(including disk interface)</small>
+                </label>
+              </div>
+              <div class="col-sm-6 dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                  id="bbc-model-dropdown">
+                  <span class="bbc-model"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark model-menu" role="menu"
+                  aria-labelledby="bbc-model-dropdown">
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="B-DFS1.2">BBC B with 8271 (DFS 1.2)</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="B-DFS0.9">BBC B with 8271 (DFS 0.9)</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="B1770">BBC B with 1770 (DFS)</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="B1770A">BBC B with 1770 (ADFS)</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="Master">BBC Master 128 (DFS)</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="MasterADFS">BBC Master 128 (ADFS)</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="MasterANFS">BBC Master 128 (ANFS)</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col-sm-6">
+                <label for="keyboardDropdown" class="col-form-label">Keyboard layout:</label>
+              </div>
+              <div class="col-sm-6 dropdown">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                  id="keyboardDropdown">
+                  <span class="keyboard-layout">Physical</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark keyboard-menu" role="menu"
+                  aria-labelledby="keyboardDropdown">
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="physical">Physical: '*' is next to Enter/Return</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="natural">Natural: '*' is shift-8</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-target="gaming">Gaming: handy for games like Zalaga</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="align-items-center">
+              <div class="row">
+                <div class="col-sm-6">
+                  <label class="col-form-label">Additional peripherals:<br /><small>(some combinations may cause
+                      compatibility issues)</small></label>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="65c02" name="65c02" />
+                    <label class="form-check-label" for="65c02">65c02 co-processor</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="hasMusic5000" name="hasMusic5000" />
+                    <label class="form-check-label" for="hasMusic5000">Music 5000 synthesiser</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="hasTeletextAdaptor" name="hasTeletextAdaptor" />
+                    <label class="form-check-label" for="hasTeletextAdaptor">Teletext adaptor</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="hasEconet" name="hasEconet" />
+                    <label class="form-check-label" for="hasEconet">Econet with file server</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="are-you-sure" tabindex="-1" aria-labelledby="aysModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="aysModalLabel">Are You Sure?</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="context"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary ays-no" data-bs-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary ays-yes">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
