@@ -1,35 +1,116 @@
+@font-face {
+    font-family: thin;
+    src: url("fonts/thin.ttf");
+}
+
+@font-face {
+    font-family: vcr;
+    src: url("fonts/vcr.woff");
+}
+
+@font-face {
+    font-family: yoster;
+    src: url("fonts/yoster.ttf");
+}
+
 * {
     margin: 0px;
     padding: 0px;
+    scrollbar-width: none;
 }
 
-nav {
-    display: flex;
-    flex-direction: column;
-    max-width: 500px;
-    position: absolute;
-    right: 0;
-}
-
-.hidden {
-    display: none;
+a {
+    text-decoration: none;
+    color: white;
 }
 
 body {
+    text-transform: uppercase !important;
+    font-family: vcr;
     display: flex !important;
     align-items: center !important;
     flex-direction: column !important;
-    /* background-color: blue !important; */
+    /* background-color: rgb(13, 13, 13) !important; */
+    background-color: rgb(8, 0, 255) !important;
     overflow: hidden;
+    cursor: crosshair;
 }
+
 
 .continer {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    width: 100vw;
+    height: 100vh;
 }
 
 #audio-stats {
-    display: block !important;
+
+    display: none !important;
+}
+
+.micro {
+    background-color: black;
+}
+
+.works,
+.tools {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem !important;
+    height: 100vh;
+    font-size: 20px;
+    gap: 30px;
+}
+
+.works div {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#title:hover {
+
+    font-weight: bold;
+    font-style: italic;
+}
+
+#title {
+    cursor: crosshair;
+    width: fit-content;
+    line-height: 10px;
+    scrollbar-width: none;
+    height: 5.5rem;
+}
+
+.blue {
+    color: blue;
+}
+
+.codeLink {
+    font-family: thin;
+    font-size: 18px;
+}
+
+/* .tools {
+    flex-direction: row;
+    width: 100vw;
+    position: fixed;
+    bottom: 0px;
+} */
+
+.head {
+    font-style: italic;
 }

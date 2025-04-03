@@ -16,24 +16,27 @@
 
 <body>
   <div class="continer">
-    <canvas id="screen" width="896" height="600"></canvas>
-    <canvas id="audio-stats" width="896" height="100"></canvas>
+    <div class="side">
+      <pre id="title"></pre>
 
-    <nav>
-      <a href="#configuration" class="nav-link" data-bs-toggle="modal" data-bs-target="#configuration">
-        <span class="bbc-model">BBC B</span></a>
-      <a href="#" id="fs">Fullscreen</a>
-      <a href="#" id="soft-reset">Soft reset</a>
-      <a href="#" id="hard-reset">Hard reset</a>
-      <a href="#download-drive" id="download-drive-link">Download</a>
-      <br>
-      <a href="?disc1=elite.ssd&autorun&embed&autoboot=true&autotype=*CAT%0a*EXEC%20!BOOT%0a">cat</a>
-      <a href="?disc1=elite.ssd&autoboot=true">1</a>
-      <a href="?disc1=frogman.ssd&autoboot=true&embed">2</a>
-      <br>
-      <input id="paste-text" type="text" />
-      <input type="file" id="disc_load" accept=".ssd,.dsd,.adf,.adm,.adl,.hfe,application/binary" />
-    </nav>
+      <p>Hi, I never understood how people used these ‘80s computers to do anything. This page is where I figure it out
+        and share what I learn.</p>
+      <div class="works">
+        <p class="head">my experiments with BBC BASIC :</p>
+      </div>
+      <div class="tools">
+        <p class="head">things i use :</p>
+        <a target="_blank" href="https://bbcmic.ro/">BBC MICRO editor</a>
+        <a target="_blank" href="www.bbcmicrobot.com">BBC MICRO BOT</a>
+        <a target="_blank" href="https://github.com/mattgodbolt/jsbeeb">jsbeeb</a>
+      </div>
+
+
+    </div>
+    <div class="micro">
+      <canvas id="screen" width="896" height="600"></canvas>
+      <canvas id="audio-stats" width="896" height="100"></canvas>
+    </div>
 
     <div class="modal fade" id="error-dialog" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -160,6 +163,42 @@
       </div>
     </div>
   </div>
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script>
+    let typed = new Typed('#title', {
+      strings: ['........................\n.BBBBB...BBBBB....CCCC..\n.BB..BB..BB..BB..CC..CC.\n.BB..BB..BB..BB..CC.....\n.BBBBB...BBBBB...CC.....\n.BB..BB..BB..BB..CC.....\n.BB..BB..BB..BB..CC..CC.\n.BBBBB...BBBBB....CCCC..',],
+      typeSpeed: 10,
+      showCursor: false,
+    });
+
+    let rgb3bit = ["000000", "ff0000", "00ff00", "0000ff", "00ffff", "ff00ff", "ffff00", "ffffff"]
+    document.querySelector("pre").addEventListener("mouseover", () => {
+      const randomColor = rgb3bit[Math.floor(Math.random() * rgb3bit.length)];
+      document.querySelector("pre").style.color = `#${randomColor}`;
+    })
+  </script>
 </body>
 
 </html>
+
+<!-- <input id="paste-text" type="text" /> -->
+<!-- <input type="file" id="disc_load" accept=".ssd,.dsd,.adf,.adm,.adl,.hfe,application/binary" /> -->
+<!-- <a href="https://github.com/mattgodbolt/jsbeeb">jsbeeb</a> -->
+<!-- <div class="control">
+      <a href="#download-drive" id="download-drive-link">Download</a>
+      <a href="#configuration" data-bs-toggle="modal"><span class="bbc-model"></span></a>
+      <a href="#" id="fs">Fullscreen</a>
+      <a href="#" id="soft-reset">Soft reset</a>
+      <a href="#" id="hard-reset">Hard reset</a>
+    </div> -->
+
+<!-- <pre>........................
+      .<span class="ascii">BBBBB</span>...<span class="ascii">BBBBB</span>....<span class="ascii">CCCC</span>..
+      .<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">CC</span>..<span class="ascii">CC</span>.
+      .<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">CC</span>.....
+      .<span class="ascii">BBBBB</span>...<span class="ascii">BBBBB</span>...<span class="ascii">CC</span>.....
+      .<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">CC</span>.....
+      .<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">BB</span>..<span class="ascii">CC</span>..<span class="ascii">CC</span>.
+      .<span class="ascii">BBBBB</span>...<span class="ascii">BBBBB</span>....<span class="ascii">CCCC</span>..
+      ........................</pre> -->
