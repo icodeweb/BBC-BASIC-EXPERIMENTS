@@ -1,0 +1,35 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    position: absolute;
+    right: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+body {
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    /* background-color: blue !important; */
+    overflow: hidden;
+}
+
+.continer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#audio-stats {
+    display: block !important;
+}
