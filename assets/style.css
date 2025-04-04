@@ -21,17 +21,13 @@
 
 a {
     text-decoration: none;
-    color: white;
+    color: rgb(226, 226, 226);
 }
 
 body {
-    text-transform: uppercase !important;
     font-family: vcr;
-    display: flex !important;
-    align-items: center !important;
-    flex-direction: column !important;
-    /* background-color: rgb(13, 13, 13) !important; */
-    background-color: rgb(8, 0, 255) !important;
+    text-transform: uppercase !important;
+    background-color: #0000ff !important;
     overflow: hidden;
     cursor: crosshair;
 }
@@ -47,19 +43,14 @@ body {
 }
 
 #audio-stats {
-
     display: none !important;
 }
 
-.micro {
-    background-color: black;
-}
-
-.works,
-.tools {
+.works {
     display: flex;
     flex-direction: column;
     overflow: auto;
+    height: 100%;
 }
 
 .side {
@@ -82,21 +73,14 @@ a:hover {
 }
 
 #title:hover {
-
     font-weight: bold;
     font-style: italic;
 }
 
 #title {
-    cursor: crosshair;
     width: fit-content;
     line-height: 10px;
-    scrollbar-width: none;
     height: 5.5rem;
-}
-
-.blue {
-    color: blue;
 }
 
 .codeLink {
@@ -104,13 +88,48 @@ a:hover {
     font-size: 18px;
 }
 
-/* .tools {
-    flex-direction: row;
-    width: 100vw;
-    position: fixed;
-    bottom: 0px;
-} */
-
 .head {
     font-style: italic;
+}
+
+.control {
+    position: fixed;
+    top: 0;
+    right: 0px;
+    padding: 1rem 1rem 1rem 20rem;
+    display: flex;
+    justify-content: space-between;
+    width: 896px;
+}
+
+.tools {
+    position: fixed;
+    bottom: 0;
+    right: 0px;
+    padding: 1rem 1rem 1rem 20rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 896px;
+}
+
+.modal-body div {
+    margin-bottom: 5px;
+}
+
+.modal-dialog {
+    max-width: 38% !important;
+}
+
+.title:hover {
+    text-decoration: none;
+}
+
+
+pre {
+    margin-block: auto;
+}
+
+#WhyAmISoSensitive {
+    height: 14rem;
 }
